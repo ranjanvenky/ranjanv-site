@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ranjan Venkatesh - Personal Encyclopedia</title>
+  <style>
+    :root {
+      --bg: #f8f9fa;
+      --page-bg: #ffffff;
+      --border: #a2a9b1;
+      --text: #202122;
+      --muted: #54595d;
+      --link: #0645ad;
+      --link-visited: #0b0080;
+      --header-bg: #eaecf0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    a:visited {
+      color: var(--link-visited);
+    }
+
+    .topbar {
+      background: var(--page-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 20px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .topbar strong {
+      color: var(--text);
+    }
+
+    .layout {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 0;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      border-right: 1px solid var(--border);
+      padding: 20px 16px;
+      font-size: 14px;
+      background: var(--bg);
+    }
+
+    .sidebar h3 {
+      font-size: 13px;
+      font-weight: normal;
+      margin: 22px 0 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar li {
+      margin: 6px 0;
+    }
+
+    .content-wrap {
+      background: var(--page-bg);
+      padding: 0 32px 40px;
+    }
+
+    .article-header {
+      padding-top: 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+
+    .article-title {
+      margin: 0 0 6px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 32px;
+      font-weight: normal;
+      line-height: 1.2;
+    }
+
+    .article-subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .article-body {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+
+    .main {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .infobox {
+      width: 290px;
+      flex: 0 0 290px;
+      border: 1px solid var(--border);
+      background: #f8f9fa;
+      font-size: 14px;
+    }
+
+    .infobox-title {
+      background: #cedff2;
+      text-align: center;
+      padding: 8px 10px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .infobox-image {
+      padding: 12px;
+      text-align: center;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .infobox-image img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #c8ccd1;
+    }
+
+    .infobox-image small {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .infobox table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .infobox th,
+    .infobox td {
+      border-top: 1px solid #c8ccd1;
+      padding: 8px 10px;
+      vertical-align: top;
+    }
+
+    .infobox th {
+      width: 35%;
+      text-align: left;
+      background: #eaecf0;
+      font-weight: 600;
+    }
+
+    .hatnote {
+      font-style: italic;
+      color: var(--muted);
+      margin: 8px 0 16px;
+      font-size: 14px;
+    }
+
+    .lead p {
+      margin-top: 0;
+    }
+
+    .toc {
+      width: fit-content;
+      min-width: 260px;
+      border: 1px solid var(--border);
+      background: #f8f9fa;
+      padding: 10px 14px;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    .toc-title {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .toc ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .toc li {
+      margin: 4px 0;
+    }
+
+    h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: normal;
+      font-size: 24px;
+      border-bottom: 1px solid var(--border);
+      margin-top: 28px;
+      margin-bottom: 12px;
+      padding-bottom: 2px;
+    }
+
+    h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: normal;
+      font-size: 20px;
+      margin-top: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin: 0 0 14px;
+      font-size: 15px;
+    }
+
+    .references {
+      font-size: 14px;
+    }
+
+    .references ol {
+      padding-left: 22px;
+    }
+
+    .footer-note {
+      margin-top: 36px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    sup {
+      font-size: 11px;
+      line-height: 0;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      .article-body {
+        flex-direction: column-reverse;
+      }
+
+      .infobox {
+        width: 100%;
+        flex: none;
+      }
+
+      .content-wrap {
+        padding: 0 16px 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <strong>Personal Encyclopedia</strong> &nbsp; &nbsp; 
+  </div>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="#top">Main page</a></li>
+        <li><a href="#biography">Biography</a></li>
+        <li><a href="#career">Career</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#references">References</a></li>
+      </ul>
+
+      <h3>Archived Tools</h3>
+      <ul>
+        <li><a href="#">Archives</a></li>
+        <li><a href="#">Personal Dairy</a></li>
+        <li><a href="#">mailbox</a></li>
+      </ul>
+    </aside>
+
+    <main class="content-wrap" id="top">
+      <header class="article-header">
+        <h1 class="article-title">Ranjan Venkatesh</h1>
+        <div class="article-subtitle">From the knowledge archive</div>
+      </header>
+
+      <div class="article-body">
+        <section class="main">
+          <div class="hatnote">
+            This article was last updated on June 2026.
+          </div>
+
+          <div class="lead">
+            <p>
+              <strong>Ranjan Venkatesh</strong> is an Indian born American technology and supply chain professional and writer known for his multidisciplinary interests spanning information systems, logistics strategy, and cultural commentary. His work and personal pursuits reflect a blend of analytical rigor and lifestyle exploration, with a focus on continuous learning and performance.
+
+Venkatesh has built a career at the intersection of information technology and supply chain operations, where he has contributed to initiatives involving process optimization, systems integration, and data-driven decision-making. His professional approach emphasizes efficiency, scalability, and the practical application of emerging technologies in complex organizational environments.
+
+From 2015 to 2018, he maintained a successful presence as a YouTube content creator, building an audience of over 100,000 subscribers. His content during this period focused primarily on technology insights and personal development, delivered with an emphasis on clarity and practical application. He later stepped away from content creation to focus on professional and personal priorities.
+
+Beginning in 2021, Venkatesh expanded into independent writing and commentary, including reviews of beer, whiskey, and restaurants. His approach combines structured evaluation with cultural context, reflecting a broader interest in craftsmanship, experience design, and lifestyle analysis.
+
+A proponent of lifelong learning, Venkatesh is an avid reader with a strong interest in philosophy, behavioral psychology, and performance literature. His unpublished works frequently explores themes of discipline, decision-making, and long-term personal growth.
+
+In addition to his intellectual pursuits, he is deeply engaged in endurance and fitness activities. He completed the 2020 San Antonio Marathon, and regularly participates in cycling and strength training. His approach to fitness mirrors his broader philosophy: consistency, measurable progress, and resilience.
+
+Ranjan's personal brand is characterized by a balance of technical expertise, cultural curiosity, and disciplined lifestyle design, positioning him as a modern generalist with both professional depth and broad personal interests.
+
+<sup><a href="#ref-1">[1]</a></sup>
+            </p>
+            <p>
+              The site is intentionally restricts sources for confidentiality reasons <sup><a href="#ref-2">[2]</a></sup>
+            </p>
+          </div>
+
+          <nav class="toc">
+            <div class="toc-title">Contents</div>
+            <ul>
+              <li><a href="#biography">1 Biography</a></li>
+              <li><a href="#career">2 Career</a></li>
+              <li><a href="#projects">3 Projects</a></li>
+              <li><a href="#interests">4 Interests</a></li>
+              <li><a href="#references">5 References</a></li>
+            </ul>
+          </nav>
+
+          <h2 id="biography">Biography</h2>
+          <p>
+            Ranjan Venkatesh was born in Hassan, in the state of Karnataka, India. He spent his early childhood in a close-knit, agrarian community, where he was exposed to a range of practical and social experiences from a young age. Known for his active and curious nature, he began formal schooling early and developed a broad set of interests rather than focusing on a single discipline.
+
+          </p>
+          <p>
+            During his school years, he participated in multiple sports, including swimming, hockey, cricket, and basketball, and was involved in competitive cricket at the KSCA zonal level. His early years are often characterized by a generalist approach, with consistent engagement across academics, athletics, and community life. He attended Expert Pre-University College and later earned a degree in Mechanical Engineering under Visvesvaraya Technological University (VTU). 
+          </p>
+
+          <h2 id="career">Career</h2>
+          <p>
+            He subsequently moved to the United States to pursue an MBA, marking a transition toward business and management-oriented roles. Following his graduate studies, he began his professional career in management consulting at USAA in San Antonio. He later continued his work in the United States with Thermo Fisher Scientific in Pittsburgh, focusing on roles that intersect operations, technology, and business strategy.
+          </p>
+
+          <h3>Current work</h3>
+          <p>
+            He works as a product management professional at a Fortune 500 company, based in Pittsburgh, Pennsylvania. His role centers on the development and management of systems that support operational and strategic decision-making, with a focus on aligning technology initiatives with business outcomes.
+          </p>
+
+          <h3>Prior experience</h3>
+          <p>
+            His prior experience includes serving as a program manager at United Services Automobile Association (USAA) in San Antonio, where he led initiatives within the CFO organization, specifically in the IT Money Movement domain. His work involved overseeing complex, cross-functional projects tied to financial systems, transaction flows, and enterprise-scale operations.
+          </p>
+
+          <h2 id="projects">Projects</h2>
+          <p>
+            He independently explored digital content distribution through search engine optimization and video platforms, building a YouTube channel in his native language that grew to over 100,000 subscribers between 2015 and 2018. The project focused on audience growth mechanics, content positioning, and platform dynamics.
+
+He later undertook a period of structured introspection and observational study, documenting insights from extended meditation practice at the meditation pyramid at Malnad College of Engineering. These observations informed a series of written reflections on attention, cognition, and personal discipline.
+
+
+          </p>
+          <p>
+           In his professional career, he has led and contributed to multiple large-scale initiatives within enterprise environments in the United States, working on projects involving financial systems, operational workflows, and technology-driven process improvements.
+          </p>
+
+          <h2 id="interests">Interests</h2>
+          <p>
+            His interests include reading across fiction, philosophy, and personal development, with an emphasis on analytical and behavioral themes. He maintains an active interest in regional food and beverage culture, particularly exploring and evaluating breweries and local culinary specialties across the U.S. East Coast.
+
+He is also engaged in mentoring college students in areas such as logical reasoning, entrepreneurial thinking, and business analysis. In his personal time, he participates in recreational endurance activities, including regular 5K runs on regional trails.
+
+Earlier in his life, he was an active strategy gaming enthusiast, with a focus on titles such as Age of Empires.
+          </p>
+
+          <h2 id="references">References</h2>
+          <div class="references">
+            <ol>
+              <li id="ref-1">Redacted - Classified - https://www.nrc.gov/reading-rm/doc-collections/cfr/part050/part050-0037</li>
+              <li id="ref-2"> Redacted - Classified - https://www.nrc.gov/reading-rm/doc-collections/cfr/part050/part050-0037</li>
+            </ol>
+          </div>
+
+          <div class="footer-note">
+            This page was built as a static HTML with hidden redirection for people with cryptographic key
+          </div>
+        </section>
+
+        <aside class="infobox">
+          <div class="infobox-title">Ranjan Venkatesh</div>
+          <div class="infobox-image">
+            <img src="https://storage.googleapis.com/ranjanv.com/ASCM.jpg" alt="Ranjan selected for ASCM Boston competition" />
+            <small> Ranjan (pictured 1st from right) at ASCM Case Solving competition - Boston (2019).</small>
+          </div>
+          <table>
+            <tr>
+              <th>Occupation</th>
+              <td>Professional</td>
+            </tr>
+            <tr>
+              <th>Known for</th>
+              <td>Technology, science, Youtube Channel and Business Analysis</td>
+            </tr>
+            <tr>
+              <th>Website</th>
+              <td><a href="https://ranjanv.com">ranjanv.com</a></td>
+            </tr>
+            <tr>
+              <th>Location</th>
+              <td>Pittsburgh, USA; Hassan, India</td>
+            </tr>
+            <tr>
+              <th>Education</th>
+              <td>MBA, Pennsylvania; Mechanical Engineering, India</td>
+            </tr>
+          </table>
+        </aside>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
